@@ -1,19 +1,25 @@
 package com.examples.entity_dto_converter.controller;
 
 import com.examples.entity_dto_converter.dto.UserDTOConstructor;
-import com.examples.entity_dto_converter.model.User;
+import com.examples.entity_dto_converter.model.UserEntity;
+import com.examples.entity_dto_converter.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
+  private final UserRepository userRepository;
+
   @PostMapping("/dto/constructor")
-  public ResponseEntity<User> saveUser(@RequestBody UserDTOConstructor requestUser) {
-    return ResponseEntity.ok();
+  public ResponseEntity<UserEntity> saveUserDtoConstructor(@RequestBody UserDTOConstructor requestUser) {
+    return ResponseEntity.ok(userRepository.save(new UserEntity(requestUser)));
   }
 
 //  @PostMapping("/dto/static-method")
