@@ -1,4 +1,4 @@
-package com.examples.entity_dto_converter.dto;
+package com.examples.entity_dto_converter.model;
 
 import jakarta.persistence.Entity;
 
