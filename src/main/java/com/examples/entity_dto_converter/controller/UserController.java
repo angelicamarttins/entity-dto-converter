@@ -1,5 +1,6 @@
 package com.examples.entity_dto_converter.controller;
 
+import com.examples.entity_dto_converter.dto.UserDTOBuilder;
 import com.examples.entity_dto_converter.dto.UserDTOConstructor;
 import com.examples.entity_dto_converter.dto.UserDTOStaticMethod;
 import com.examples.entity_dto_converter.model.UserEntity;
@@ -25,14 +26,14 @@ public class UserController {
 
   @PostMapping("/dto/static-method")
   public ResponseEntity<UserEntity> saveUserDtoStaticMethod(@RequestBody UserDTOStaticMethod requestUser) {
-    return ResponseEntity.ok(userRepository.save(UserEntity.toEntity(requestUser)));
+    return ResponseEntity.ok(userRepository.save(UserEntity.toEntityStaticMethod(requestUser)));
   }
 
-//  @PostMapping("/dto/builder")
-//  public ResponseEntity<User> saveUser(@RequestBody UserDTOBuilder requestUser) {
-//    return ResponseEntity.ok();
-//  }
-//
+  @PostMapping("/dto/builder")
+  public ResponseEntity<UserEntity> saveUserDtoBuilder(@RequestBody UserDTOBuilder requestUser) {
+    return ResponseEntity.ok(userRepository.save(new UserEntity().toEntityBuilder(requestUser)));
+  }
+
 //  @PostMapping("/dto/manual-mapper")
 //  public ResponseEntity<User> saveUser(@RequestBody UserDTOManualMapper requestUser) {
 //    return ResponseEntity.ok();
@@ -65,11 +66,12 @@ public class UserController {
     return ResponseEntity.ok(UserDTOStaticMethod.toDto(userEntity));
   }
 
-//  @PostMapping("/entity/builder")
-//  public ResponseEntity<UserDTOBuilder> saveUser(@RequestBody User user) {
-//    return ResponseEntity.ok();
-//  }
-//
+  @PostMapping("/entity/builder")
+  public ResponseEntity<UserDTOBuilder> saveUserEntityBuilder(@RequestBody UserEntity userEntity) {
+    userRepository.save(userEntity);
+    return ResponseEntity.ok(new UserDTOBuilder().toDto(userEntity));
+  }
+
 //  @PostMapping("/entity/manual-mapper")
 //  public ResponseEntity<UserDTOManualMapper> saveUser(@RequestBody User user) {
 //    return ResponseEntity.ok();
