@@ -1,8 +1,10 @@
 package com.examples.entity_dto_converter.model;
 
 import com.examples.entity_dto_converter.dto.UserDTOConstructor;
+import com.examples.entity_dto_converter.dto.UserDTOStaticMethod;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,5 +25,14 @@ public class UserEntity {
   public UserEntity(UserDTOConstructor userDTOConstructor) {
     this.name = userDTOConstructor.getName();
     this.age = userDTOConstructor.getAge();
+  }
+
+  public static UserEntity toEntity(UserDTOStaticMethod userDTOStaticMethod) {
+    UserEntity userEntity = new UserEntity();
+
+    userEntity.setName(userDTOStaticMethod.getName());
+    userEntity.setAge(userDTOStaticMethod.getAge());
+
+    return userEntity;
   }
 }
