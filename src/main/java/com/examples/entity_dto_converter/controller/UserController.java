@@ -22,7 +22,7 @@ public class UserController {
     return ResponseEntity.ok(userRepository.save(new UserEntity(requestUser)));
   }
 
-//  @PostMapping("/dto/static-method")
+  //  @PostMapping("/dto/static-method")
 //  public ResponseEntity<User> saveUser(@RequestBody UserDTOStaticMethod requestUser) {
 //    return ResponseEntity.ok();
 //  }
@@ -51,12 +51,13 @@ public class UserController {
 //  public ResponseEntity<User> saveUser(@RequestBody UserDTOStreamBuilder requestUser) {
 //    return ResponseEntity.ok();
 //  }
-//
-//  @PostMapping("/entity/constructor")
-//  public ResponseEntity<UserDTOConstructor> saveUser(@RequestBody User user) {
-//    return ResponseEntity.ok();
-//  }
-//
+
+  @PostMapping("/entity/constructor")
+  public ResponseEntity<UserDTOConstructor> saveUserEntityConstructor(@RequestBody UserEntity userEntity) {
+    userRepository.save(userEntity);
+    return ResponseEntity.ok(new UserDTOConstructor(userEntity));
+  }
+
 //  @PostMapping("/entity/static-method")
 //  public ResponseEntity<UserDTOStaticMethod> saveUser(@RequestBody User user) {
 //    return ResponseEntity.ok();
