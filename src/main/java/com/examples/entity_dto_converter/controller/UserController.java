@@ -39,15 +39,15 @@ public class UserController {
   }
 
   @PostMapping("/dto/manual-mapper")
-  public ResponseEntity<UserEntity> saveUserEntityManualMapper(@RequestBody UserDTOManualMapper requestUser) {
+  public ResponseEntity<UserEntity> saveUserDtoManualMapper(@RequestBody UserDTOManualMapper requestUser) {
     return ResponseEntity.ok(new UserEntityManualMapper().toEntityManualMapper(requestUser));
   }
 
-//  @PostMapping("/dto/mapstruct")
-//  public ResponseEntity<User> saveUser(@RequestBody UserDTOMapStruct requestUser) {
-//    return ResponseEntity.ok();
-//  }
-//
+  @PostMapping("/dto/mapstruct")
+  public ResponseEntity<UserEntity> saveUserDtoMapStruct(@RequestBody UserDTOMapStruct requestUser) {
+    return ResponseEntity.ok();
+  }
+
 //  @PostMapping("/dto/stream-lambda")
 //  public ResponseEntity<User> saveUser(@RequestBody UserDTOStreamLambda requestUser) {
 //    return ResponseEntity.ok();
@@ -82,11 +82,11 @@ public class UserController {
     return ResponseEntity.ok(new UserDTOManualMapper().toDto(userEntity));
   }
 
-//  @PostMapping("/entity/mapstruct")
-//  public ResponseEntity<UserDTOMapStruct> saveUser(@RequestBody User user) {
-//    return ResponseEntity.ok();
-//  }
-//
+  @PostMapping("/entity/mapstruct")
+  public ResponseEntity<UserDTOMapStruct> saveUserEntityMapStruct(@RequestBody UserEntity userEntity) {
+    return ResponseEntity.ok();
+  }
+
 //  @PostMapping("/entity/stream-lambda")
 //  public ResponseEntity<UserDTOStreamLambda> saveUser(@RequestBody User user) {
 //    return ResponseEntity.ok();
