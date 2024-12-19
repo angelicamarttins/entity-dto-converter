@@ -1,5 +1,6 @@
 package com.examples.entity_dto_converter.controller;
 
+import com.examples.entity_dto_converter.converters.UserEntityBuilder;
 import com.examples.entity_dto_converter.dto.UserDTOBuilder;
 import com.examples.entity_dto_converter.dto.UserDTOConstructor;
 import com.examples.entity_dto_converter.dto.UserDTOStaticMethod;
@@ -31,7 +32,7 @@ public class UserController {
 
   @PostMapping("/dto/builder")
   public ResponseEntity<UserEntity> saveUserDtoBuilder(@RequestBody UserDTOBuilder requestUser) {
-    return ResponseEntity.ok(userRepository.save(new UserEntity().toEntityBuilder(requestUser)));
+    return ResponseEntity.ok(userRepository.save(new UserEntityBuilder().toEntityBuilder(requestUser)));
   }
 
 //  @PostMapping("/dto/manual-mapper")

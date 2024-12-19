@@ -40,14 +40,5 @@ public class UserEntity {
     return userEntity;
   }
 
-  public UserEntity toEntityBuilder(UserDTOBuilder userDTOBuilder) {
-    return UserEntity
-        .builder()
-        .name(userDTOBuilder.getName())
-        .age(userDTOBuilder.getAge())
-        .userId(UUID.randomUUID())
-        .createdAt(LocalDateTime.now())
-        .build();
-  }
 
 }
