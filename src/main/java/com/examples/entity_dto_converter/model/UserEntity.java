@@ -31,14 +31,4 @@ public class UserEntity {
     this.age = userDTOConstructor.getAge();
   }
 
-  public static UserEntity toEntityStaticMethod(UserDTOStaticMethod userDTOStaticMethod) {
-    UserEntity userEntity = new UserEntity();
-
-    userEntity.setName(userDTOStaticMethod.getName());
-    userEntity.setAge(userDTOStaticMethod.getAge());
-
-    return userEntity;
-  }
-
-
 }

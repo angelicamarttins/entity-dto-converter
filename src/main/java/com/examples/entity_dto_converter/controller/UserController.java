@@ -1,6 +1,7 @@
 package com.examples.entity_dto_converter.controller;
 
 import com.examples.entity_dto_converter.converters.UserEntityBuilder;
+import com.examples.entity_dto_converter.converters.UserEntityStaticMethod;
 import com.examples.entity_dto_converter.dto.UserDTOBuilder;
 import com.examples.entity_dto_converter.dto.UserDTOConstructor;
 import com.examples.entity_dto_converter.dto.UserDTOStaticMethod;
@@ -27,7 +28,7 @@ public class UserController {
 
   @PostMapping("/dto/static-method")
   public ResponseEntity<UserEntity> saveUserDtoStaticMethod(@RequestBody UserDTOStaticMethod requestUser) {
-    return ResponseEntity.ok(userRepository.save(UserEntity.toEntityStaticMethod(requestUser)));
+    return ResponseEntity.ok(userRepository.save(UserEntityStaticMethod.toEntityStaticMethod(requestUser)));
   }
 
   @PostMapping("/dto/builder")
