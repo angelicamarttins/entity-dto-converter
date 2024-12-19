@@ -3,13 +3,12 @@ package com.examples.entity_dto_converter.controller;
 import com.examples.entity_dto_converter.converters.UserEntityBuilder;
 import com.examples.entity_dto_converter.converters.UserEntityManualMapper;
 import com.examples.entity_dto_converter.converters.UserEntityStaticMethod;
-import com.examples.entity_dto_converter.dto.UserDTOBuilder;
-import com.examples.entity_dto_converter.dto.UserDTOConstructor;
-import com.examples.entity_dto_converter.dto.UserDTOManualMapper;
-import com.examples.entity_dto_converter.dto.UserDTOStaticMethod;
+import com.examples.entity_dto_converter.converters.UserMapper;
+import com.examples.entity_dto_converter.dto.*;
 import com.examples.entity_dto_converter.model.UserEntity;
 import com.examples.entity_dto_converter.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
   private final UserRepository userRepository;
+  private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
   @PostMapping("/dto/constructor")
   public ResponseEntity<UserEntity> saveUserDtoConstructor(@RequestBody UserDTOConstructor requestUser) {
@@ -45,7 +45,7 @@ public class UserController {
 
   @PostMapping("/dto/mapstruct")
   public ResponseEntity<UserEntity> saveUserDtoMapStruct(@RequestBody UserDTOMapStruct requestUser) {
-    return ResponseEntity.ok();
+    return ResponseEntity.ok(userRepository.save(userMapper.toEntityMapStruct(requestUser)));
   }
 
 //  @PostMapping("/dto/stream-lambda")
@@ -84,7 +84,8 @@ public class UserController {
 
   @PostMapping("/entity/mapstruct")
   public ResponseEntity<UserDTOMapStruct> saveUserEntityMapStruct(@RequestBody UserEntity userEntity) {
-    return ResponseEntity.ok();
+    userRepository.save(userEntity);
+    return ResponseEntity.ok(userMapper.toDto(userEntity));
   }
 
 //  @PostMapping("/entity/stream-lambda")
