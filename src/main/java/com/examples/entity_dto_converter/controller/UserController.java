@@ -78,9 +78,10 @@ public class UserController {
     return ResponseEntity.ok(userMapper.toDto(userEntity));
   }
 
-//  @PostMapping("/entity/jpa-projection")
-//  public ResponseEntity<UserDTOProjection> saveUser(@RequestBody User user) {
-//    return ResponseEntity.ok();
-//  }
+  @PostMapping("/entity/jpa-projection")
+  public ResponseEntity<UserDTOProjection> saveUserEntityProjection(@RequestBody UserEntity userEntity) {
+    userRepository.save(userEntity);
+    return ResponseEntity.ok(userRepository.getUserDTOProjection());
+  }
 
 }
