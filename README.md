@@ -2,14 +2,12 @@ The main purpose of this project is to explore and test different approaches for
 
 The following methods are implemented:
 
-- Constructors
-- Static Methods
+- Constructor
+- Static Method
 - @Builder (Lombok)
-- Manual Mappers
+- Manual Mapper
 - MapStruct
-- Streams and Lambdas
-- Streams with @Builder
-- Spring Data JPA Projections
+- Spring Data JPA Projection
 
-This project was built with Java 23, Spring Boot 3, and JUnit 5.
+This project was built with Java 23, Spring Boot 3 and JUnit 5.
 

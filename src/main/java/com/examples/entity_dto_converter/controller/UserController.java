@@ -48,16 +48,6 @@ public class UserController {
     return ResponseEntity.ok(userRepository.save(userMapper.toEntityMapStruct(requestUser)));
   }
 
-//  @PostMapping("/dto/stream-lambda")
-//  public ResponseEntity<User> saveUser(@RequestBody UserDTOStreamLambda requestUser) {
-//    return ResponseEntity.ok();
-//  }
-//
-//  @PostMapping("/dto/stream-builder")
-//  public ResponseEntity<User> saveUser(@RequestBody UserDTOStreamBuilder requestUser) {
-//    return ResponseEntity.ok();
-//  }
-
   @PostMapping("/entity/constructor")
   public ResponseEntity<UserDTOConstructor> saveUserEntityConstructor(@RequestBody UserEntity userEntity) {
     userRepository.save(userEntity);
@@ -88,16 +78,6 @@ public class UserController {
     return ResponseEntity.ok(userMapper.toDto(userEntity));
   }
 
-//  @PostMapping("/entity/stream-lambda")
-//  public ResponseEntity<UserDTOStreamLambda> saveUser(@RequestBody User user) {
-//    return ResponseEntity.ok();
-//  }
-//
-//  @PostMapping("/entity/stream-builder")
-//  public ResponseEntity<UserDTOStreamBuilder> saveUser(@RequestBody User user) {
-//    return ResponseEntity.ok();
-//  }
-//
 //  @PostMapping("/entity/jpa-projection")
 //  public ResponseEntity<UserDTOProjection> saveUser(@RequestBody User user) {
 //    return ResponseEntity.ok();
