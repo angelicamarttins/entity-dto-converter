@@ -13,11 +13,12 @@ import com.examples.entitydtoconverter.dto.UserDtoStaticMethod;
 import com.examples.entitydtoconverter.model.UserEntity;
 import com.examples.entitydtoconverter.repository.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -42,86 +42,187 @@ public class UserController {
 
   @PostMapping("/dto/constructor")
   @Operation(summary = "Create UserEntity by DTO constructor")
-  @Parameters({
-    @Parameter(name = "requestUser", description = "DTO to convert into Entity", required = true)
-  })
-  public ResponseEntity<UserEntity> saveUserDtoConstructor(@RequestBody UserDtoConstructor requestUser) {
+  public ResponseEntity<UserEntity> saveUserDtoConstructor(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "DTO to convert into Entity",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{\"name\": \"JohnDoe\", \"age\": 30}")))
+    @RequestBody UserDtoConstructor requestUser
+  ) {
     return ResponseEntity.ok(userRepository.save(new UserEntity(requestUser)));
   }
 
   @PostMapping("/dto/static-method")
   @Operation(summary = "Create UserEntity by DTO static method")
-  @Parameter(name = "requestUser", description = "DTO to convert into Entity", required = true)
-  public ResponseEntity<UserEntity> saveUserDtoStaticMethod(@RequestBody UserDtoStaticMethod requestUser) {
+  public ResponseEntity<UserEntity> saveUserDtoStaticMethod(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "DTO to convert into Entity",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{\"name\": \"JohnDoe\", \"age\": 30}")))
+    @RequestBody UserDtoStaticMethod requestUser
+  ) {
     return ResponseEntity.ok(userRepository.save(UserEntityStaticMethod.toEntityStaticMethod(requestUser)));
   }
 
   @PostMapping("/dto/builder")
   @Operation(summary = "Create UserEntity by DTO builder")
-  @Parameter(name = "requestUser", description = "DTO to convert into Entity", required = true)
-  public ResponseEntity<UserEntity> saveUserDtoBuilder(@RequestBody UserDtoBuilder requestUser) {
+  public ResponseEntity<UserEntity> saveUserDtoBuilder(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "DTO to convert into Entity",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{\"name\": \"JohnDoe\", \"age\": 30}")))
+    @RequestBody UserDtoBuilder requestUser
+  ) {
     return ResponseEntity.ok(userRepository.save(new UserEntityBuilder().toEntityBuilder(requestUser)));
   }
 
   @PostMapping("/dto/manual-mapper")
   @Operation(summary = "Create UserEntity by DTO manual mapper")
-  @Parameter(name = "requestUser", description = "DTO to convert into Entity", required = true)
-  public ResponseEntity<UserEntity> saveUserDtoManualMapper(@RequestBody UserDtoManualMapper requestUser) {
+  public ResponseEntity<UserEntity> saveUserDtoManualMapper(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "DTO to convert into Entity",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{\"name\": \"JohnDoe\", \"age\": 30}"
+        )))
+    @RequestBody UserDtoManualMapper requestUser
+  ) {
     return ResponseEntity.ok(new UserEntityManualMapper().toEntityManualMapper(requestUser));
   }
 
   @PostMapping("/dto/mapstruct")
   @Operation(summary = "Create UserEntity by DTO MapStruct")
-  @Parameter(name = "requestUser", description = "DTO to convert into Entity", required = true)
-  public ResponseEntity<UserEntity> saveUserDtoMapStruct(@RequestBody UserDtoMapStruct requestUser) {
+  public ResponseEntity<UserEntity> saveUserDtoMapStruct(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "DTO to convert into Entity",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{"
+          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
+          + "\"userName\": \"JohnDoe\", "
+          + "\"userAge\": 30}, "
+          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        )))
+    @RequestBody UserDtoMapStruct requestUser
+  ) {
     return ResponseEntity.ok(userRepository.save(userMapper.toEntityMapStruct(requestUser)));
   }
 
   @PostMapping("/entity/constructor")
   @Operation(summary = "Create UserEntity and return DTO by constructor")
-  @Parameter(name = "userEntity", description = "Entity to convert into DTO", required = true)
-  public ResponseEntity<UserDtoConstructor> saveUserEntityConstructor(@RequestBody UserEntity userEntity) {
+  public ResponseEntity<UserDtoConstructor> saveUserEntityConstructor(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "Entity to convert into DTO",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{"
+          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
+          + "\"name\": \"JohnDoe\", "
+          + "\"age\": 30}, "
+          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        )))
+    @RequestBody UserEntity userEntity
+  ) {
     userRepository.save(userEntity);
     return ResponseEntity.ok(new UserDtoConstructor(userEntity));
   }
 
   @PostMapping("/entity/static-method")
   @Operation(summary = "Create UserEntity and return DTO by static method")
-  @Parameter(name = "userEntity", description = "Entity to convert into DTO", required = true)
-  public ResponseEntity<UserDtoStaticMethod> saveUserEntityStaticMethod(@RequestBody UserEntity userEntity) {
+  public ResponseEntity<UserDtoStaticMethod> saveUserEntityStaticMethod(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "Entity to convert into DTO",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{"
+          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
+          + "\"name\": \"JohnDoe\", "
+          + "\"age\": 30}, "
+          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        )))
+    @RequestBody UserEntity userEntity
+  ) {
     userRepository.save(userEntity);
     return ResponseEntity.ok(UserDtoStaticMethod.toDto(userEntity));
   }
 
   @PostMapping("/entity/builder")
   @Operation(summary = "Create UserEntity and return DTO by builder")
-  @Parameter(name = "userEntity", description = "Entity to convert into DTO", required = true)
-  public ResponseEntity<UserDtoBuilder> saveUserEntityBuilder(@RequestBody UserEntity userEntity) {
+  public ResponseEntity<UserDtoBuilder> saveUserEntityBuilder(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "Entity to convert into DTO",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{"
+          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
+          + "\"name\": \"JohnDoe\", "
+          + "\"age\": 30}, "
+          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        )))
+    @RequestBody UserEntity userEntity
+  ) {
     userRepository.save(userEntity);
     return ResponseEntity.ok(new UserDtoBuilder().toDto(userEntity));
   }
 
   @PostMapping("/entity/manual-mapper")
   @Operation(summary = "Create UserEntity and return DTO by manual mapper")
-  @Parameter(name = "userEntity", description = "Entity to convert into DTO", required = true)
-  public ResponseEntity<UserDtoManualMapper> saveUserEntityManualMapper(@RequestBody UserEntity userEntity) {
+  public ResponseEntity<UserDtoManualMapper> saveUserEntityManualMapper(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "Entity to convert into DTO",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{"
+          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
+          + "\"name\": \"JohnDoe\", "
+          + "\"age\": 30}, "
+          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        )))
+    @RequestBody UserEntity userEntity
+  ) {
     userRepository.save(userEntity);
     return ResponseEntity.ok(new UserDtoManualMapper().toDto(userEntity));
   }
 
   @PostMapping("/entity/mapstruct")
   @Operation(summary = "Create UserEntity and return DTO by MapStruct")
-  @Parameter(name = "userEntity", description = "Entity to convert into DTO", required = true)
-  public ResponseEntity<UserDtoMapStruct> saveUserEntityMapStruct(@RequestBody UserEntity userEntity) {
+  public ResponseEntity<UserDtoMapStruct> saveUserEntityMapStruct(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "Entity to convert into DTO",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{"
+          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
+          + "\"name\": \"JohnDoe\", "
+          + "\"age\": 30}, "
+          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        )))
+    @RequestBody UserEntity userEntity
+  ) {
     userRepository.save(userEntity);
     return ResponseEntity.ok(userMapper.toDto(userEntity));
   }
 
   @PostMapping("/entity/jpa-projection")
   @Operation(summary = "Create UserEntity and return DTO by JPA projection")
-  @Parameter(name = "userEntity", description = "Entity to convert into DTO", required = true)
-  public ResponseEntity<List<UserDtoProjection>> saveUserEntityProjection(@RequestBody UserEntity userEntity) {
+  public ResponseEntity<List<UserDtoProjection>> saveUserEntityProjection(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "Entity to convert into DTO",
+      required = true,
+      content = @Content(mediaType = "application/json",
+        examples = @ExampleObject(value = "{"
+          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
+          + "\"name\": \"JohnDoe\", "
+          + "\"age\": 30}, "
+          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        )))
+    @RequestBody UserEntity userEntity
+  ) {
     userRepository.save(userEntity);
+    System.out.println("AAAAAAAAAAAAAAAAA" + userEntity);
     return ResponseEntity.ok(userRepository.getUserDtoProjection());
   }
 

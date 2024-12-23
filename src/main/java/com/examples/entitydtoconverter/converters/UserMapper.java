@@ -27,6 +27,7 @@ public abstract class UserMapper {
     if (userEntity.getUserId() == null) {
       userEntity.setUserId(UUID.randomUUID());
     }
+
     if (userEntity.getCreatedAt() == null) {
       userEntity.setCreatedAt(LocalDateTime.now());
     }
