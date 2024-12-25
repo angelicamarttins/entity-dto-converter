@@ -47,7 +47,13 @@ public class UserController {
       description = "DTO to convert into Entity",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{\"name\": \"JohnDoe\", \"age\": 30}")))
+        examples = @ExampleObject(value = """
+          {
+            "name": "JohnDoe",
+            "age": 30
+          }
+          """
+        )))
     @RequestBody UserDtoConstructor requestUser
   ) {
     return ResponseEntity.ok(userRepository.save(new UserEntity(requestUser)));
@@ -60,7 +66,13 @@ public class UserController {
       description = "DTO to convert into Entity",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{\"name\": \"JohnDoe\", \"age\": 30}")))
+        examples = @ExampleObject(value = """
+          {
+            "name": "JohnDoe",
+            "age": 30
+          }
+          """
+        )))
     @RequestBody UserDtoStaticMethod requestUser
   ) {
     return ResponseEntity.ok(userRepository.save(UserEntityStaticMethod.toEntityStaticMethod(requestUser)));
@@ -73,7 +85,13 @@ public class UserController {
       description = "DTO to convert into Entity",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{\"name\": \"JohnDoe\", \"age\": 30}")))
+        examples = @ExampleObject(value = """
+          {
+            "name": "JohnDoe",
+            "age": 30
+          }
+          """
+        )))
     @RequestBody UserDtoBuilder requestUser
   ) {
     return ResponseEntity.ok(userRepository.save(new UserEntityBuilder().toEntityBuilder(requestUser)));
@@ -86,7 +104,12 @@ public class UserController {
       description = "DTO to convert into Entity",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{\"name\": \"JohnDoe\", \"age\": 30}"
+        examples = @ExampleObject(value = """
+          {
+            "name": "JohnDoe",
+            "age": 30
+          }
+          """
         )))
     @RequestBody UserDtoManualMapper requestUser
   ) {
@@ -100,11 +123,12 @@ public class UserController {
       description = "DTO to convert into Entity",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{"
-          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
-          + "\"userName\": \"JohnDoe\", "
-          + "\"userAge\": 30}, "
-          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        examples = @ExampleObject(value = """
+          {
+            "name": "JohnDoe",
+            "age": 30
+          }
+          """
         )))
     @RequestBody UserDtoMapStruct requestUser
   ) {
@@ -118,11 +142,14 @@ public class UserController {
       description = "Entity to convert into DTO",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{"
-          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
-          + "\"name\": \"JohnDoe\", "
-          + "\"age\": 30}, "
-          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        examples = @ExampleObject(value = """
+          {
+              "userId": "84797a56-84f7-4df0-9805-33206b619065",
+              "name": "JohnDoe",
+              "age": 30,
+              "createdAt": "2024-12-17T18:46:40.710937942"
+          }
+          """
         )))
     @RequestBody UserEntity userEntity
   ) {
@@ -137,11 +164,14 @@ public class UserController {
       description = "Entity to convert into DTO",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{"
-          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
-          + "\"name\": \"JohnDoe\", "
-          + "\"age\": 30}, "
-          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        examples = @ExampleObject(value = """
+          {
+              "userId": "84797a56-84f7-4df0-9805-33206b619065",
+              "name": "JohnDoe",
+              "age": 30,
+              "createdAt": "2024-12-17T18:46:40.710937942"
+          }
+          """
         )))
     @RequestBody UserEntity userEntity
   ) {
@@ -156,11 +186,14 @@ public class UserController {
       description = "Entity to convert into DTO",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{"
-          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
-          + "\"name\": \"JohnDoe\", "
-          + "\"age\": 30}, "
-          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        examples = @ExampleObject(value = """
+          {
+              "userId": "84797a56-84f7-4df0-9805-33206b619065",
+              "name": "JohnDoe",
+              "age": 30,
+              "createdAt": "2024-12-17T18:46:40.710937942"
+          }
+          """
         )))
     @RequestBody UserEntity userEntity
   ) {
@@ -175,11 +208,14 @@ public class UserController {
       description = "Entity to convert into DTO",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{"
-          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
-          + "\"name\": \"JohnDoe\", "
-          + "\"age\": 30}, "
-          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        examples = @ExampleObject(value = """
+          {
+              "userId": "84797a56-84f7-4df0-9805-33206b619065",
+              "name": "JohnDoe",
+              "age": 30,
+              "createdAt": "2024-12-17T18:46:40.710937942"
+          }
+          """
         )))
     @RequestBody UserEntity userEntity
   ) {
@@ -194,11 +230,14 @@ public class UserController {
       description = "Entity to convert into DTO",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{"
-          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
-          + "\"name\": \"JohnDoe\", "
-          + "\"age\": 30}, "
-          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        examples = @ExampleObject(value = """
+          {
+              "userId": "84797a56-84f7-4df0-9805-33206b619065",
+              "name": "JohnDoe",
+              "age": 30,
+              "createdAt": "2024-12-17T18:46:40.710937942"
+          }
+          """
         )))
     @RequestBody UserEntity userEntity
   ) {
@@ -213,16 +252,18 @@ public class UserController {
       description = "Entity to convert into DTO",
       required = true,
       content = @Content(mediaType = "application/json",
-        examples = @ExampleObject(value = "{"
-          + "\"userId\": \"84797a56-84f7-4df0-9805-33206b619065\", "
-          + "\"name\": \"JohnDoe\", "
-          + "\"age\": 30}, "
-          + "\"createdAt\": \"2024-12-17T18:46:40.710937942\""
+        examples = @ExampleObject(value = """
+          {
+              "userId": "84797a56-84f7-4df0-9805-33206b619065",
+              "name": "JohnDoe",
+              "age": 30,
+              "createdAt": "2024-12-17T18:46:40.710937942"
+          }
+          """
         )))
     @RequestBody UserEntity userEntity
   ) {
     userRepository.save(userEntity);
-    System.out.println("AAAAAAAAAAAAAAAAA" + userEntity);
     return ResponseEntity.ok(userRepository.getUserDtoProjection());
   }
 
