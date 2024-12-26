@@ -23,6 +23,11 @@ public class UserEntity {
   private Integer age;
   private LocalDateTime createdAt = LocalDateTime.now();
 
+  public UserEntity(String name, Integer age) {
+    this.name = name;
+    this.age = age;
+  }
+
   public UserEntity(UserDtoConstructor userDtoConstructor) {
     this.name = userDtoConstructor.getName();
     this.age = userDtoConstructor.getAge();
